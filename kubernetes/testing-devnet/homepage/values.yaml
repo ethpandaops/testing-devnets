@@ -32,6 +32,17 @@ testnet-homepage:
     ## Ansible setup
     https://github.com/ethpandaops/testing-devnet
 
+    ## Ethereum node inventory
+    - https://config.testing-devnet.ethpandaops.io/api/v1/nodes/inventory
+
+    Some examples on how to filter specific data from the node inventory:
+    ```sh
+    # Getting execution layer client enodes
+    curl -s https://config.testing-devnet.ethpandaops.io/api/v1/nodes/inventory | jq -r '.ethereum_pairs[] | .execution.enode'
+    # Getting conseus layer client ENRs
+    curl -s https://config.testing-devnet.ethpandaops.io/api/v1/nodes/inventory | jq -r '.ethereum_pairs[] | .consensus.enr'
+    ```
+
     ## Genesis configuration
     ### Execution layer clients
     ```sh
