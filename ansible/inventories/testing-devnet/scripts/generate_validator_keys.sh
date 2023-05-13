@@ -34,20 +34,20 @@ function prep_group {
   done
 }
 
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 0 69 "lighthouse-geth" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 69 12 "lighthouse-besu" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 81 21 "lighthouse-nethermind" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 102 12 "lighthouse-erigon" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 114 69 "prysm-geth" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 183 12 "prysm-besu" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 195 21 "prysm-nethermind" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 216 12 "prysm-erigon" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 228 3 "lodestar-geth" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 231 9 "nimbus-geth" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 240 3 "nimbus-besu" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 243 3 "nimbus-nethermind" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 246 3 "nimbus-erigon" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 249 30 "teku-geth" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 279 6 "teku-besu" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 285 9 "teku-nethermind" 2000
-#prep_group 1 "$VALIDATORS_MNEMONIC_0" 294 6 "teku-erigon" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 0 69 "lighthouse-geth" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 69 12 "lighthouse-besu" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 81 21 "lighthouse-nethermind" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 102 12 "lighthouse-erigon" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 114 69 "prysm-geth" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 183 12 "prysm-besu" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 195 21 "prysm-nethermind" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 216 12 "prysm-erigon" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 228 3 "lodestar-geth" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 231 9 "nimbus-geth" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 240 3 "nimbus-besu" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 243 3 "nimbus-nethermind" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 246 3 "nimbus-erigon" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 249 30 "teku-geth" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 279 6 "teku-besu" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 285 9 "teku-nethermind" 2000
+prep_group 1 "$VALIDATORS_MNEMONIC_0" 294 6 "teku-erigon" 2000
