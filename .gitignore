@@ -31,4 +31,5 @@ terraform.rc
 network-configs/**/mnemonics.yaml
 
 # github large files
-network-configs/
+network-configs/*/tranches
+network-configs/*/genesis.ssz
