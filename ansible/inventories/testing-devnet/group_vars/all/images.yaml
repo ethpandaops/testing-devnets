@@ -1,0 +1,13 @@
+default_ethereum_client_images:
+  geth: ethereum/client-go:v1.11.6
+  nethermind: nethermind/nethermind:1.18.0
+  besu: hyperledger/besu:23.4.0-amd64
+  prysm: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.0.3
+  prysm_validator: gcr.io/prysmaticlabs/prysm/validator:v4.0.3
+  teku: consensys/teku:23.5.0-amd64
+  lighthouse: sigp/lighthouse:v4.1.0
+  nimbus: statusim/nimbus-eth2:multiarch-v23.5.0
+  lodestar: chainsafe/lodestar:v1.8.0
+
+default_tooling_images:
+  ethereum_metrics_exporter: ethpandaops/ethereum-metrics-exporter:0.21.0
