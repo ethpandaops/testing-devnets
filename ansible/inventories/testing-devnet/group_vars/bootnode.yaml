@@ -10,41 +10,41 @@ eth_inventory_web_container_env:
   LETSENCRYPT_HOST: "{{ server_fqdn }}"
 
 # role: ethpandaops.general.ethereum_node
-ethereum_node_el: ethereumjs
-ethereum_node_cl: lodestar
+ethereum_node_el: geth
+ethereum_node_cl: lighthouse
 ethereum_node_cl_validator_enabled: false
 
-# role: ethpandaops.general.ethereumjs
-ethereumjs_container_image: "{{ default_ethereum_client_images.ethereumjs }}"
-ethereumjs_container_env:
+# role: ethpandaops.general.geth
+geth_container_image: "{{ default_ethereum_client_images.geth }}"
+geth_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
-ethereumjs_container_volumes:
-  - "{{ ethereumjs_datadir }}:/data"
-  - "{{ ethereumjs_auth_jwt_path }}:/execution-auth.jwt:ro"
-  - "{{ eth_testnet_config_dir }}:/network-config:ro"
-ethereumjs_container_command_extra_args:
-  - --gethGenesis=/network-config/genesis.json
-  - --syncMode=full
-  - --maxPeers=75
+geth_container_command_extra_args:
+  - --http.api=eth,net,web3,debug
+  - --http.vhosts=*
+  - --networkid={{ ethereum_network_id }}
+  - --syncmode=full
+  - --ethstats={{ inventory_hostname }}:{{ ethstats_secret }}@{{ ethstats_url }}
+  - --verbosity=4
+  - --maxpeers=350
+geth_init_custom_network: true
+geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
-# role: ethpandaops.general.lodestar
-lodestar_container_image: "{{ default_ethereum_client_images.lodestar }}"
-lodestar_container_env:
+# role: ethpandaops.general.lighthouse
+lighthouse_container_image: "{{ default_ethereum_client_images.lighthouse }}"
+lighthouse_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-lodestar_container_volumes:
-  - "{{ lodestar_datadir }}:/data"
-  - "{{ lodestar_auth_jwt_path }}:/execution-auth.jwt:ro"
+lighthouse_container_volumes:
+  - "{{ lighthouse_datadir }}:/data"
+  - "{{ lighthouse_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-lodestar_container_command_extra_args:
-  - --paramsFile=/network-config/config.yaml
-  - --genesisStateFile=/network-config/genesis.ssz
-  #- --logLevel=debug
-  - --network.connectToDiscv5Bootnodes
-  - --nat=true
+lighthouse_container_command_extra_args:
+  - --testnet-dir=/network-config
+  #- --boot-nodes={{ ethereum_cl_bootnodes | join(',') }}
+  - --debug-level=info
 
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write
