@@ -11,14 +11,14 @@ ethstats:
     className: ingress-nginx-public
 
     hosts:
-      - host: ethstats.4844-devnet-5.ethpandaops.io
+      - host: ethstats.testing-devnet.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
 
   secretEnv:
     WS_SECRET: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.4844-devnets.ethstats_secret}>"
-  
+
   resources:
     requests:
       memory: 256Mi

@@ -7,7 +7,7 @@ eth-faucet:
     className: ingress-nginx-public
 
     hosts:
-      - host: faucet-2.4844-devnet-5.ethpandaops.io
+      - host: faucet-2.testing-devnet.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
@@ -18,8 +18,8 @@ eth-faucet:
   extraEnv:
     - name: WEB3_PROVIDER
       value: "http://geth-prysm-001-exe:8545"
-  
+
   args:
     - -faucet.amount=33
-    - -faucet.name=4844-devnet-5
+    - -faucet.name=testing-devnet
     - -proxycount=2

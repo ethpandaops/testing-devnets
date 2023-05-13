@@ -11,7 +11,7 @@ fauceth:
     className: ingress-nginx-public
 
     hosts:
-      - host: faucet.4844-devnet-5.ethpandaops.io
+      - host: faucet.testing-devnet.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
@@ -19,7 +19,7 @@ fauceth:
   secretEnv:
     APP_AMOUNT: "32080000000000000000" # 32.08 ETH
     APP_IMAGEURL: "https://i.imgur.com/M0gEdpw.png"
-    APP_TITLE: "4844-devnet-5 Faucet"
+    APP_TITLE: "testing-devnet Faucet"
     APP_CHAINS: "4844001004"
     APP_LOGGING: "VERBOSE"
     APP_ETHKEY: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.4844-devnets.faucet_private_key}>"
@@ -42,7 +42,7 @@ fauceth:
     - >
       echo '
       [{
-        "name": "4844-devnet-5",
+        "name": "testing-devnet",
         "chain": "4844Eth4",
         "icon": "ethereum",
         "rpc": [

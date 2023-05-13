@@ -1,0 +1,122 @@
+testnet-homepage:
+  fullnameOverride: homepage
+
+  replicas: 1
+
+  image:
+    pullPolicy: Always
+    repository: ethpandaops/ethereum-testnet-homepage
+
+  resources:
+    requests:
+      cpu: 33m
+      memory: 64Mi
+  ingress:
+    enabled: true
+
+    className: ingress-nginx-public
+
+    hosts:
+      - host: testing-devnet.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  customMarkdown: |-
+    ## General information
+    ### Key split
+    ```
+    0-600000 - EthPandaOps
+    ```
+
+    ## Ansible setup
+    https://github.com/ethpandaops/testing-devnet
+
+    ## Genesis configuration
+    ### Execution layer clients
+    ```sh
+    https://config.testing-devnet.ethpandaops.io/el/bootnodes
+    https://config.testing-devnet.ethpandaops.io/el/genesis.json
+    https://config.testing-devnet.ethpandaops.io/el/chainspec.json
+    ```
+    ### Consensus layer clients
+    ```sh
+    https://config.testing-devnet.ethpandaops.io/cl/bootnodes
+    https://config.testing-devnet.ethpandaops.io/cl/config.yaml
+    https://config.testing-devnet.ethpandaops.io/cl/genesis.ssz
+    https://config.testing-devnet.ethpandaops.io/cl/deploy_block.txt
+    https://config.testing-devnet.ethpandaops.io/cl/deposit_contract.txt
+    https://config.testing-devnet.ethpandaops.io/cl/deposit_contract_block.txt
+    ```
+
+  customArgs:
+    - -b
+    - https://testing-devnet.ethpandaops.io
+
+  config:
+    baseURL: https://testing-devnet.ethpandaops.io
+    languageCode: en-us
+    title: testing-devnet
+    theme: PaperMod
+    markup:
+      highlight:
+        codeFences: true
+        guessSyntax: true
+        lineNos: false
+        style: monokai
+    params:
+      disableThemeToggle: true
+      defaultTheme: dark
+      ethereum:
+        faucetUrl: https://faucet.testing-devnet.ethpandaops.io
+        faucet2Url: https://faucet-2.testing-devnet.ethpandaops.io
+        rpcUrl: https://rpc.testing-devnet.ethpandaops.io
+        explorerUrl: https://explorer.testing-devnet.ethpandaops.io
+        forkmonUrl: https://forkmon.testing-devnet.ethpandaops.io
+        beaconexplorerUrl: https://beaconchain.testing-devnet.ethpandaops.io
+        checkpointSyncUrl: https://checkpoint-sync.testing-devnet.ethpandaops.io
+        ethstatsUrl: https://ethstats.testing-devnet.ethpandaops.io
+        chainName: "testing-devnet"
+        chainId: "4844001004"
+        github: https://github.com/ethpandaops/4844-testnet/tree/master/network-configs/devnet-5
+      metamask:
+        enabled: true
+      logo:
+        enabled: false
+        url: https://i.imgur.com/M0gEdpw.png
+      assets:
+        favicon: https://i.imgur.com/M0gEdpw.png
+        favicon16x16: https://i.imgur.com/M0gEdpw.png
+        favicon32x32: https://i.imgur.com/M0gEdpw.png
+        apple_touch_icon: https://i.imgur.com/M0gEdpw.png
+        safari_pinned_tab: https://i.imgur.com/M0gEdpw.png
+
+      links:
+      - name: "Testnet Spec"
+        dataLookup: github
+      - name: "JSON RPC"
+        dataLookup: rpcUrl
+      - name: "Explorer"
+        dataLookup: explorerUrl
+      # - name: "Beaconchain explorer"
+      #   dataLookup: beaconexplorerUrl
+      # - name: "Transaction explorer"
+      #   dataLookup: explorerUrl
+      # - name: "Checkpoint Sync"
+      #   dataLookup: checkpointSyncUrl
+      - name: "Faucet 1"
+        dataLookup: faucetUrl
+      - name: "Faucet 2"
+        dataLookup: faucet2Url
+      - name: "Forkmon"
+        dataLookup: forkmonUrl
+      - name: "Ethstats"
+        dataLookup: ethstatsUrl
+    menu:
+      main:
+        - identifier: ethereum-website
+          name: ethereum.org
+          url: https://ethereum.org
+          weight: 30
+    disableKinds: ["taxonomy", "taxonomyTerm"]
+    copyright: "This page is "
