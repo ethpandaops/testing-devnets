@@ -5,7 +5,7 @@ terraform {
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "~> 2.0"
+      version = "~> 2.28"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -27,6 +27,10 @@ terraform {
 
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
+}
+
+provider "digitalocean" {
+  http_retry_max = 20
 }
 
 variable "cloudflare_api_token" {
