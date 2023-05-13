@@ -77,8 +77,8 @@ testnet-homepage:
         checkpointSyncUrl: https://checkpoint-sync.testing-devnet.ethpandaops.io
         ethstatsUrl: https://ethstats.testing-devnet.ethpandaops.io
         chainName: "testing-devnet"
-        chainId: "4844001004"
-        github: https://github.com/ethpandaops/4844-testnet/tree/master/network-configs/devnet-5
+        chainId: "1337100"
+        github: https://github.com/ethpandaops/testing-devnet/tree/master/network-configs/testing-devnet
       metamask:
         enabled: true
       logo:
