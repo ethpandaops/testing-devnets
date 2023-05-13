@@ -37,4 +37,3 @@ nethermind_container_command_extra_args:
   - --EthStats.Server=wss://{{ ethstats_url }}/api/
   - --log=DEBUG
   - Network.MaxActivePeers=350
-nethermind_container_pull: true

@@ -25,4 +25,3 @@ geth_container_command_extra_args:
   - --maxpeers=350
 geth_init_custom_network: true
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
-geth_container_pull: true

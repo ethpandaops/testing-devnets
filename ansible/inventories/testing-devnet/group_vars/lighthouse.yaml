@@ -43,4 +43,3 @@ lighthouse_validator_container_command_extra_args:
   - --debug-level=debug
   - --target-peers=300
 lighthouse_validator_datadir: /data/lighthouse-validator
-lighhtouse_container_pull: true
