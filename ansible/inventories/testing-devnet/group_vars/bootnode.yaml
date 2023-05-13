@@ -1,4 +1,4 @@
-ethereum_cl_bootnode: "{{ hostvars['bootnode-1']['cl_bootnode_fact_enr'] }}"
+cl_bootnode_privkey: "{{ secret_bootnode_privkey[inventory_hostname_short] }}"
 
 # role: eth_inventory_web
 eth_inventory_web_container_networks: "{{ docker_networks_shared }}"
