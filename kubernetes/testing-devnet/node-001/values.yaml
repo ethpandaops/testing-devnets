@@ -120,7 +120,7 @@ node-001:
         runAsUser: 0
       command:
         - sh
-        - -ace
+        - -acex
         - >
           DEPOSIT_CONTRACT_URI=https://config.testing-devnet.ethpandaops.io/deposit_contract.txt;
           DEPOSIT_CONTRACT_BLOCK_URI=https://config.testing-devnet.ethpandaops.io/cl/deposit_contract_block.txt;
