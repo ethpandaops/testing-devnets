@@ -126,7 +126,7 @@ node-001:
           DEPOSIT_CONTRACT_BLOCK_URI=https://config.testing-devnet.ethpandaops.io/cl/deposit_contract_block.txt;
           DEPLOY_BLOCK_URI=https://config.testing-devnet.ethpandaops.io/cl/deploy_block.txt;
           GENESIS_CONFIG_URI=https://config.testing-devnet.ethpandaops.io/cl/config.yaml;
-          GENESIS_SSZ_URI=https://drive.google.com/u/1/uc?id=18oxBvcIjVV-8thtL9cKALLLKc7uRLpD7&export=download;
+          GENESIS_SSZ_URI="https://drive.google.com/u/1/uc?id=18oxBvcIjVV-8thtL9cKALLLKc7uRLpD7&export=download";
           BOOTNODE_URI=https://config.testing-devnet.ethpandaops.io/bootstrap_nodes.txt;
           mkdir -p /data/testnet_spec;
           if ! [ -f /data/testnet_spec/genesis.ssz ];
