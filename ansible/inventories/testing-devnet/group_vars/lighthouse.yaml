@@ -41,5 +41,5 @@ lighthouse_validator_container_command_extra_args:
   - --testnet-dir=/network-config
   - --graffiti={{ ethereum_node_cl }}/{{ ethereum_node_el }}
   - --debug-level=debug
-  - --target-peers=300
+
 lighthouse_validator_datadir: /data/lighthouse-validator
