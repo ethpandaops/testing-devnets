@@ -22,7 +22,7 @@ fauceth:
     APP_TITLE: "testing-devnet Faucet"
     APP_CHAINS: "1337100"
     APP_LOGGING: "VERBOSE"
-    APP_ETHKEY: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.4844-devnets.faucet_private_key}>"
+    APP_ETHKEY: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.testing-devnets.faucet_private_key}>"
     HCAPTCHA_SECRET: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.secret_key}>"
     HCAPTCHA_SITEKEY: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.site_key}>"
 
@@ -43,7 +43,7 @@ fauceth:
       echo '
       [{
         "name": "testing-devnet",
-        "chain": "4844Eth4",
+        "chain": "Eth",
         "icon": "ethereum",
         "rpc": [
           "http://geth-prysm-001-exe:8545"
