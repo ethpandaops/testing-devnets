@@ -46,7 +46,7 @@ fauceth:
         "chain": "Eth",
         "icon": "ethereum",
         "rpc": [
-          "http://geth-prysm-001-exe:8545"
+          "http://geth-prysm-001:8545"
         ],
         "faucets": [],
         "nativeCurrency": {
