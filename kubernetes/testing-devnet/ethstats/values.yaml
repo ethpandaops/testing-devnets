@@ -17,8 +17,7 @@ ethstats:
             pathType: Prefix
 
   secretEnv:
-    #WS_SECRET: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.testing-devnets.ethstats_secret}>"
-    WS_SECRET: "testingdevnetSuperSecret" # it's in clear text on purpose
+    WS_SECRET: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.testing-devnets.ethstats_secret}>"
   resources:
     requests:
       memory: 256Mi
