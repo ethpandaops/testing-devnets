@@ -16,7 +16,7 @@ node-001:
       tag: v1.11.6
     p2pNodePort:
       enabled: true
-      port: 31888
+      port: 31988
     persistence:
       enabled: true
       size: 50Gi
@@ -99,7 +99,7 @@ node-001:
         memory: 7Gi
     p2pNodePort:
       enabled: false
-      startsAt: 31004
+      startsAt: 31104
     persistence:
       enabled: true
       size: 50Gi
