@@ -40,7 +40,6 @@ prysm_container_command_extra_simple_args:
   - --pprof
   - --enable-debug-rpc-endpoints
   - --verbosity=debug
-  - --p2p-max-peers=300
 
 prysm_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
