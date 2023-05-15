@@ -32,4 +32,3 @@ network-configs/**/mnemonics.yaml
 
 # github large files
 network-configs/*/tranches
-network-configs/*/genesis.ssz
