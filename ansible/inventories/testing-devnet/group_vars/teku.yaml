@@ -22,7 +22,7 @@ teku_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-  JAVA_OPTS: "-XX:SoftMaxHeapSize=4g -Xmx8g"
+  JAVA_OPTS: "-Xmx8g"
 
 teku_container_volumes:
   - "{{ teku_datadir }}:/data"
