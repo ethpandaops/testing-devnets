@@ -39,8 +39,7 @@ node-001:
       - --networkid="$(cat /data/chainid.txt)"
       - --ws.api="eth,net,engine,web3,txpool"
       - --http.api="eth,net,engine,web3,txpool"
-      #- --ethstats=rpc-geth-prysm:<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.testing-devnets.ethstats_secret}>@ethstats.testing-devnet.ethpandaops.io
-      - --ethstats=rpc-geth-prysm:testingdevnetSuperSecret@ethstats.testing-devnet.ethpandaops.io
+      - --ethstats=rpc-geth-prysm:<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.testing-devnets.ethstats_secret}>@ethstats.testing-devnet.ethpandaops.io
       - --syncmode=full
       - --gcmode archive
     initContainers:
@@ -103,12 +102,12 @@ node-001:
       size: 50Gi
     extraArgs:
       - --execution-endpoint=http://geth-prysm-001:8551
-      - "--bootstrap-node=enr:-Iq4QCZQV7vRXwOsV-LEOyqRfomTECv0cDi8cJ0FTCN2zczTDh7sdyqOLC6QheHWpKVaB4R9c3R2ve9hrBRUV_IlIrmGAYgV9zPKgmlkgnY0gmlwhK6KC66Jc2VjcDI1NmsxoQNRVLSWkLN2QD2hJV-h9QjBGzhJiypTTVBm5iInoVPC0IN1ZHCCIyk"
-      - "--bootstrap-node=enr:-Ly4QD7pPXwZq-DEoXiUq74qf9RUADQQuhrY4NTudBsL0WooBPqO-ytwdVRBErqGnOf0xDlgj9V4GBN4iLuuXUFLE5YBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhK6KC66Jc2VjcDI1NmsxoQKjrzyl2PypAoi14MKCbR3KcketDNMcQAI01ALHGFUdRohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
-      - "--bootstrap-node=enr:-Iq4QNKqO9cySRrEz8vGV52WryOtPUd1QU5cVT2xyNFNtGs2V66nQaMWIPhiVF7lNFeVwZh9Iop05krxOZbOb-KekzmGAYgV95atgmlkgnY0gmlwhKdjOiGJc2VjcDI1NmsxoQJ-pwNcIfru4tfsxS35E34y60lkS4VbjyucluzkMzC6vYN1ZHCCIyk"
-      - "--bootstrap-node=enr:-Ly4QGNjaieUPJjgnnW8RuuR8GOzH4fPolgDRdHZlxPwar0oV15OEUh7XVB1oQuCH4jFYtLX6yoeRLNyNKw8NMrranIBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhKdjOiGJc2VjcDI1NmsxoQNpSqLTcsBGCeC3c74ry_3TZSMun9iFQbBu2ii0xU6PbIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
-      - "--bootstrap-node=enr:-Iq4QIw2D0QA0M8i7AwHaHDx14iiq67DROOzFtPZlBvFF8RaaW39lC7tC0q3sQP_d78UL73laL6yKYZwGUGEd4HZ8waGAYgV96VpgmlkgnY0gmlwhI5d0pyJc2VjcDI1NmsxoQIWRSUju4ohEFH4bhyMZ-aHRxzYNv-BjBnPQREYZKBTlIN1ZHCCIyk"
-      - "--bootstrap-node=enr:-Ly4QLJ-_LySUAowiSzCU0sQJttYEwYIyWCxB69UrsBgqXa-Y50etjeetCP692Xc3FXN-6BEhhD63QEq5ZgXFMJAEHQBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhI5d0pyJc2VjcDI1NmsxoQJhZYdZ5E4HjkS0jC4_XUnYrJNy9dCtklgKDC7R1XMqPIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+      - "--bootstrap-node=enr:-Iq4QAOpZmhjlNufctu7sIoUbYBzHf6DbPNmVzM6arvqdEHuIJ6ju7MIFaAlBgAn4rW3gw1jMhIS6SlK9DIXIMJT-f-GAYgV9zPLgmlkgnY0gmlwhK6KC66Jc2VjcDI1NmsxoQNRVLSWkLN2QD2hJV-h9QjBGzhJiypTTVBm5iInoVPC0IN1ZHCCIyk"
+      - "--bootstrap-node=enr:-Iq4QJEhqdQZafLjLVMJqGFJlIlJBn1x3K03hQL4qBYGybTrOITDVvzuCWz33wU7fFZhxb4OtFeUr8hnzhw2GAWPbd2GAYgV95augmlkgnY0gmlwhKdjOiGJc2VjcDI1NmsxoQJ-pwNcIfru4tfsxS35E34y60lkS4VbjyucluzkMzC6vYN1ZHCCIyk"
+      - "--bootstrap-node=enr:-Iq4QFUDGkvvO4_UJN0ljGydFBF1vVA-fcauG5K52S-XBYPAd7CULCwudDAUFPT5yxbwcbzRnbFsa4aAiQ2WPBxp-6CGAYgV96VqgmlkgnY0gmlwhI5d0pyJc2VjcDI1NmsxoQIWRSUju4ohEFH4bhyMZ-aHRxzYNv-BjBnPQREYZKBTlIN1ZHCCIyk"
+      - "--bootstrap-node=enr:-Ly4QNkqKrDOxzZhTKB1hEpPGmFo4Qbc2G5zxDi-GasLnwKtbsig609BpmDNDUZLm3zeSw5NhmpebkGacWxfQhCHvYABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhK6KC66Jc2VjcDI1NmsxoQJKZrdm_em6lRxRp4OgYEdNbEv4Cwi1eJUrB6zQUYydbIhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+      - "--bootstrap-node=enr:-Ly4QOAjwQrmvz9e3-jHooNL3RZ7edhOe3nms4QrwQccb6lweNaTLoy9r879ShqMbIEKoFl8Kgcwu6H-8CBnm5cdV-4Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhKdjOiGJc2VjcDI1NmsxoQLe-X-GPhJGWsBijNEOicnnJv6W_X_NTTEcAwXSKJLkIYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
+      - "--bootstrap-node=enr:-Ly4QL8juPSkM5rAxHR4XIBI20cVy94I3QgW54pH9B_ewaZVPnDdczmGlZg7KlcjuKhOb0K_NzknESm_saoyjSTSVggBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCUNM6OQAAARRQAAAAAAAAAgmlkgnY0gmlwhI5d0pyJc2VjcDI1NmsxoQNA0VNSUxZ3h_D4AhjPjXocRnLqrmA-p9Fnp6m0V3oJRohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA"
       - --genesis-state=/data/testnet_spec/genesis.ssz
       - --chain-config-file=/data/testnet_spec/config.yaml
     initContainers:
@@ -122,12 +121,12 @@ node-001:
         - sh
         - -acex
         - >
-          DEPOSIT_CONTRACT_URI=https://config.testing-devnet.ethpandaops.io/deposit_contract.txt;
-          DEPOSIT_CONTRACT_BLOCK_URI=https://config.testing-devnet.ethpandaops.io/cl/deposit_contract_block.txt;
-          DEPLOY_BLOCK_URI=https://config.testing-devnet.ethpandaops.io/cl/deploy_block.txt;
-          GENESIS_CONFIG_URI=https://config.testing-devnet.ethpandaops.io/cl/config.yaml;
-          GENESIS_SSZ_URI="https://drive.google.com/u/1/uc?id=18oxBvcIjVV-8thtL9cKALLLKc7uRLpD7&export=download";
-          BOOTNODE_URI=https://config.testing-devnet.ethpandaops.io/bootstrap_nodes.txt;
+          DEPOSIT_CONTRACT_URI="https://config.testing-devnet.ethpandaops.io/deposit_contract.txt";
+          DEPOSIT_CONTRACT_BLOCK_URI="https://config.testing-devnet.ethpandaops.io/cl/deposit_contract_block.txt";
+          DEPLOY_BLOCK_URI="https://config.testing-devnet.ethpandaops.io/cl/deploy_block.txt";
+          GENESIS_CONFIG_URI="https://config.testing-devnet.ethpandaops.io/cl/config.yaml";
+          GENESIS_SSZ_URI="https://config.testing-devnet.ethpandaops.io/cl/genesis.ssz";
+          BOOTNODE_URI="https://config.testing-devnet.ethpandaops.io/bootstrap_nodes.txt";
           mkdir -p /data/testnet_spec;
           if ! [ -f /data/testnet_spec/genesis.ssz ];
           then
