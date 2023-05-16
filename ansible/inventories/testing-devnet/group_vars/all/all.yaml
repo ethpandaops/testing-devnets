@@ -66,6 +66,8 @@ ethereum_node_el_ports_metrics: 6060
 ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
 
 # role: eth_testnet_config
+eth_testnet_config_dir: /data/ethereum-network-config
+eth_testnet_config_local_dir_src: "../network-configs/{{ ethereum_network_name }}/"
 eth_testnet_config_git_enabled: true
 eth_testnet_config_git_repo: https://github.com/ethpandaops/testing-devnet
 eth_testnet_config_git_version: master
