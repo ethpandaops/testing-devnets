@@ -442,12 +442,12 @@ variable "digitalocean_vm_groups" {
     {
       id = "teku-besu"
       vms = {
-        "1" = { region = "blr1",size = "m-4vcpu-32gb" }
-        "2" = { region = "blr1",size = "m-4vcpu-32gb" }
-        "3" = { region = "nyc3",size = "m-4vcpu-32gb" }
-        "4" = { region = "nyc3",size = "m-4vcpu-32gb" }
-        "5" = { size = "m-4vcpu-32gb" }
-        "6" = { size = "m-4vcpu-32gb" }
+        "1" = { region = "blr1" }
+        "2" = { region = "blr1" }
+        "3" = { region = "nyc3" }
+        "4" = { region = "nyc3" }
+        "5" = {}
+        "6" = {}
       },
     },
     {
