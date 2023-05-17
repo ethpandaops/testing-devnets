@@ -5,7 +5,7 @@ default_ethereum_client_images:
   erigon: thorax/erigon:v2.43.0
   prysm: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.0.3
   prysm_validator: gcr.io/prysmaticlabs/prysm/validator:v4.0.3
-  teku: consensys/teku:23.5.0-amd64
+  teku: consensys/teku:23.4.0-amd64
   lighthouse: sigp/lighthouse:v4.1.0
   nimbus: statusim/nimbus-eth2:multiarch-v23.5.0
   lodestar: chainsafe/lodestar:v1.8.0
