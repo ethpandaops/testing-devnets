@@ -1,0 +1,6 @@
+dependencies:
+- name: forky
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.1.0
+digest: sha256:823ceb26072699fb60f287ab2e8aaae87d374d3d793f26b8f5317ac9eae1a863
+generated: "2023-05-18T10:56:49.107535+10:00"
