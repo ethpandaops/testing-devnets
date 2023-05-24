@@ -1,8 +1,5 @@
 default_ethereum_client_images:
   besu: hyperledger/besu:23.4.0-amd64
-  nethermind: nethermind/nethermind:1.18.0
-  erigon: thorax/erigon:v2.43.0
-  geth: ethereum/client-go:v1.11.6
   lighthouse: michaelsproul/lighthouse:test3
 
 lighthouse_container_command_extra_args:

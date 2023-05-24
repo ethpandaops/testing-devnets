@@ -1,0 +1,15 @@
+default_ethereum_client_images:
+  erigon: thorax/erigon:v2.43.0
+  lighthouse: michaelsproul/lighthouse:test3
+
+lighthouse_container_command_extra_args:
+  - --testnet-dir=/network-config
+  - --boot-nodes={{ ethereum_cl_bootnodes | join(',') }}
+  - --debug-level=debug
+  - --shuffling-cache-size=256
+  - --validator-monitor-auto
+
+lighthouse_validator_container_command_extra_args:
+  - --testnet-dir=/network-config
+  - --graffiti=hydra/{{ ethereum_node_cl }}/{{ ethereum_node_el }}
+  - --debug-level=debug
