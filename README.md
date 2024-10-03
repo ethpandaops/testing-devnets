@@ -1,30 +1,35 @@
 <div align="center"><img src="./docs/images/panda.png" width="300"/></div>
-<h2 align="center">🐼 ❤️.oO<br>"Pandas love everything"</h2>
+<h2 align="center">🐼 ❤️.oO<br>"Pandas love Pectra"</h2>
 <h1 align="center">Infrastructure code for Dev/Testnets</h1>
 
 <p align="center">
-<a href="https://github.com/ethpandaops/template-testnet/actions/workflows/ansible_lint.yaml"><img src="https://github.com/ethpandaops/template-testnet/actions/workflows/ansible_lint.yaml/badge.svg"></a>
-<a href="https://github.com/ethpandaops/template-testnet/actions/workflows/terraform_lint.yaml"><img src="https://github.com/ethpandaops/template-testnet/actions/workflows/terraform_lint.yaml/badge.svg"></a>
-<a href="https://github.com/ethpandaops/template-testnet/actions/workflows/helm_lint.yaml"><img src="https://github.com/ethpandaops/template-testnet/actions/workflows/helm_lint.yaml/badge.svg"></a>
+<a href="https://github.com/ethpandaops/pectra-devnets/actions/workflows/ansible_lint.yaml"><img src="https://github.com/ethpandaops/pectra-devnets/actions/workflows/ansible_lint.yaml/badge.svg"></a>
+<a href="https://github.com/ethpandaops/pectra-devnets/actions/workflows/terraform_lint.yaml"><img src="https://github.com/ethpandaops/pectra-devnets/actions/workflows/terraform_lint.yaml/badge.svg"></a>
+<a href="https://github.com/ethpandaops/pectra-devnets/actions/workflows/helm_lint.yaml"><img src="https://github.com/ethpandaops/pectra-devnets/actions/workflows/helm_lint.yaml/badge.svg"></a>
 </p>
 
 This repository contains the infrastructure code used to setup ~all~ dev/testnets. A lot of the code uses reusable components either provided by our [ansible collection](https://github.com/ethpandaops/ansible-collection-general) or our [helm charts for kubernetes](https://github.com/ethpandaops/ethereum-helm-charts/).
 
 # Networks
 
-Status   | Network                                                  | Links   | Ansible                                                      | Terraform | Kubernetes
-------   |----------------------------------------------------------| ----     |  -----                                                       | -------   | ------
- 🟢 | [testing-devnet](https://testing-devnet.ethpandaops.io/) | [Network config](network-configs/devnet-0) / [Inventory](https://bootnode-1.srv.template-testnet.ethpandaops.io/meta/api/v1/inventory.json)     | [🔗](ansible/inventories/devnet-0) | [🔗](terraform/devnet-0) | [🔗](kubernetes/devnet-0)
-
+Status   | Network                                                    | Links                                                                                                                                                                                                                                            | Ansible                            | Terraform                | Kubernetes
+------   |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|--------------------------| ------
+ 🔴 Off | [pectra-devnet-0](https://pectra-devnet-0.ethpandaops.io/) | [Network config](network-configs/devnet-0) / [Inventory](https://bootnode-1.pectra-devnet-0.ethpandaops.io/meta/api/v1/inventory.json) / [Validator ranges](https://bootnode-1.pectra-devnet-0.ethpandaops.io/meta/api/v1/validator-ranges.json) | [🔗](ansible/inventories/devnet-0) | [🔗](terraform/devnet-0) | [🔗](kubernetes/devnet-0)
+ 🔴 Off | [pectra-devnet-1](https://pectra-devnet-1.ethpandaops.io/) | [Network config](network-configs/devnet-1) / [Inventory](https://bootnode-1.pectra-devnet-1.ethpandaops.io/meta/api/v1/inventory.json) / [Validator ranges](https://bootnode-1.pectra-devnet-1.ethpandaops.io/meta/api/v1/validator-ranges.json) | [🔗](ansible/inventories/devnet-1) | [🔗](terraform/devnet-1) | [🔗](kubernetes/devnet-1)
+ 🔴 Off | [pectra-devnet-2](https://pectra-devnet-2.ethpandaops.io/) | [Network config](network-configs/devnet-2) / [Inventory](https://bootnode-1.pectra-devnet-2.ethpandaops.io/meta/api/v1/inventory.json) / [Validator ranges](https://bootnode-1.pectra-devnet-2.ethpandaops.io/meta/api/v1/validator-ranges.json) | [🔗](ansible/inventories/devnet-2) | [🔗](terraform/devnet-2) | [🔗](kubernetes/devnet-2)
+ 🟢 Active | [pectra-devnet-3](https://pectra-devnet-3.ethpandaops.io/) | [Network config](network-configs/devnet-3) / [Inventory](https://bootnode-1.pectra-devnet-3.ethpandaops.io/meta/api/v1/inventory.json) / [Validator ranges](https://bootnode-1.pectra-devnet-3.ethpandaops.io/meta/api/v1/validator-ranges.json) | [🔗](ansible/inventories/devnet-3) | [🔗](terraform/devnet-3) | [🔗](kubernetes/devnet-3)
 # Development
 ## Version management for tools
 
 We're using [asdf](https://github.com/asdf-vm/asdf) to make sure that we all use the same versions across tools. Our repositories should contain versions defined in .tools-versions.
 
-You can then use [`./asdf-setup.sh`](./asdf-setup.sh) to install all dependencies.
+You can then use [`./setup.sh`](./asdf-setup.sh) to install all dependencies.
 
 ## Terraform
-From [`./terraform/devnet-0/`](./terraform/devnet-0/)
+From [`./terraform/devnet-2/`](./terraform/devnet-2/)
+
+Make sure you select either hetzner or digitalocean (default is digitialocean), if you want to use hetzner rename digitalocean.tf to digitalocean.tf.disabled and rename hetzner.tf.disabled to hetzner.tf and vice versa.
+
 ```shell
 terraform init
 terraform apply
@@ -34,313 +39,110 @@ terraform apply
 To install the nodes according to the inventory file that is generated by the terraform template run the following commands from [`./ansible/`](./ansible/)
 ```shell
 ./install_dependencies.sh
-ansible-playbook -i inventories/devnet-0/inventory.ini playbook.yaml
+ansible-playbook -i inventories/devnet-2/inventory.ini playbook.yaml
 ```
 In order to clean up the deployment
 ```shell
-ansible-playbook -i inventories/devnet-0/inventory.ini cleanup_ethereum.yaml
+ansible-playbook -i inventories/devnet-2/inventory.ini cleanup_ethereum.yaml
 ```
 
-## Key split up:
+# Spinning up a New Testnet
+To create a new testnet using the infrastructure code, follow these steps:
+
+## Validator Configuration
+1. Open the [main.tf](terraform/devnet-2/main.tf) file located in the terraform/devnet-2/ directory.
+
+2. Locate the sections that define the different nodes and their corresponding validator ranges, for this example this is `variable "digitalocean_vm_groups"`
+
+3. Adjust the validator indexes in the terraform/main.tf file based on your desired allocation of validators to nodes.
+
+For example, let's say you want to assign validator index 0-24 to the lodestar-besu-1 node and validator index 25-224 to the lighthouse-nethermind-1 node. Update the main.tf file as follows:
+```terraform
+    {
+      id = "lodestar-besu"
+      vms = {
+        "1" = { ansible_vars : "validator_start=0 validator_end=25" }
+      },
+    },
+    {
+      id = "lighthouse-nethermind"
+      vms = {
+        "1" = { ansible_vars : "validator_start=25 validator_end=225" }
+      },
+    },
+```
+Make sure to adjust the validator ranges according to your requirements and the number of validators in your network. This configuration ensures that validators within the specified ranges will be allocated to the corresponding nodes during the deployment. By customizing the validator indexes in the Terraform configuration, you can allocate validators to specific nodes in your network according to your desired configuration.
+
+4. `terraform apply` will create a the machines and the inventory file for you. The inventory file will be located in the [ansible/inventories/devnet-2](ansible/inventories/devnet-2/) directory.
+
+5. The inventory.ini file will have the list of all the nodes that were created by Terraform. The inventory file will also have the validator ranges that were specified in the Terraform configuration. The validator ranges will be used by the Ansible playbook to allocate validators to the corresponding nodes.
+```ini
+[lodestar_besu]
+lodestar-besu-1 ansible_host=167.99.34.241 cloud=digitalocean cloud_region=ams3 validator_start=0 validator_end=25
+...
+```
+
+6. Adjust the total number of validators in the [ansible/inventories/devnet-2/group_vars/all.yaml](ansible/inventories/devnet-2/group_vars/all.yaml) file (ethereum_genesis_generator_config_files.values.env.NUMBER_OF_VALIDATORS) to match with your total number of validators that you are running.. This will be used by the Ansible playbook to generate the validator keys and deposit data for the network.
+
+## Network Configuration
+1. [ansible/inventories/devnet-2/group_vars/all.yaml](ansible/inventories/devnet-2/group_vars/all.yaml) has all the network configuration parameters. Adjust the parameters according to your requirements. Most likely you will not need to adjust these, unless you would like to use a custom setup. The default configuration will work for most networks.
+
+## Deploying the Network
+1. Run
 ```shell
-writing keystores for host lighthouse-geth-1: 0 - 2000
-writing keystores for host lighthouse-geth-2: 2000 - 4000
-writing keystores for host lighthouse-geth-3: 4000 - 6000
-writing keystores for host lighthouse-geth-4: 6000 - 8000
-writing keystores for host lighthouse-geth-5: 8000 - 10000
-writing keystores for host lighthouse-geth-6: 10000 - 12000
-writing keystores for host lighthouse-geth-7: 12000 - 14000
-writing keystores for host lighthouse-geth-8: 14000 - 16000
-writing keystores for host lighthouse-geth-9: 16000 - 18000
-writing keystores for host lighthouse-geth-10: 18000 - 20000
-writing keystores for host lighthouse-geth-11: 20000 - 22000
-writing keystores for host lighthouse-geth-12: 22000 - 24000
-writing keystores for host lighthouse-geth-13: 24000 - 26000
-writing keystores for host lighthouse-geth-14: 26000 - 28000
-writing keystores for host lighthouse-geth-15: 28000 - 30000
-writing keystores for host lighthouse-geth-16: 30000 - 32000
-writing keystores for host lighthouse-geth-17: 32000 - 34000
-writing keystores for host lighthouse-geth-18: 34000 - 36000
-writing keystores for host lighthouse-geth-19: 36000 - 38000
-writing keystores for host lighthouse-geth-20: 38000 - 40000
-writing keystores for host lighthouse-geth-21: 40000 - 42000
-writing keystores for host lighthouse-geth-22: 42000 - 44000
-writing keystores for host lighthouse-geth-23: 44000 - 46000
-writing keystores for host lighthouse-geth-24: 46000 - 48000
-writing keystores for host lighthouse-geth-25: 48000 - 50000
-writing keystores for host lighthouse-geth-26: 50000 - 52000
-writing keystores for host lighthouse-geth-27: 52000 - 54000
-writing keystores for host lighthouse-geth-28: 54000 - 56000
-writing keystores for host lighthouse-geth-29: 56000 - 58000
-writing keystores for host lighthouse-geth-30: 58000 - 60000
-writing keystores for host lighthouse-geth-31: 60000 - 62000
-writing keystores for host lighthouse-geth-32: 62000 - 64000
-writing keystores for host lighthouse-geth-33: 64000 - 66000
-writing keystores for host lighthouse-geth-34: 66000 - 68000
-writing keystores for host lighthouse-geth-35: 68000 - 70000
-writing keystores for host lighthouse-geth-36: 70000 - 72000
-writing keystores for host lighthouse-geth-37: 72000 - 74000
-writing keystores for host lighthouse-geth-38: 74000 - 76000
-writing keystores for host lighthouse-geth-39: 76000 - 78000
-writing keystores for host lighthouse-geth-40: 78000 - 80000
-writing keystores for host lighthouse-geth-41: 80000 - 82000
-writing keystores for host lighthouse-geth-42: 82000 - 84000
-writing keystores for host lighthouse-geth-43: 84000 - 86000
-writing keystores for host lighthouse-geth-44: 86000 - 88000
-writing keystores for host lighthouse-geth-45: 88000 - 90000
-writing keystores for host lighthouse-geth-46: 90000 - 92000
-writing keystores for host lighthouse-geth-47: 92000 - 94000
-writing keystores for host lighthouse-geth-48: 94000 - 96000
-writing keystores for host lighthouse-geth-49: 96000 - 98000
-writing keystores for host lighthouse-geth-50: 98000 - 100000
-writing keystores for host lighthouse-geth-51: 100000 - 102000
-writing keystores for host lighthouse-geth-52: 102000 - 104000
-writing keystores for host lighthouse-geth-53: 104000 - 106000
-writing keystores for host lighthouse-geth-54: 106000 - 108000
-writing keystores for host lighthouse-geth-55: 108000 - 110000
-writing keystores for host lighthouse-geth-56: 110000 - 112000
-writing keystores for host lighthouse-geth-57: 112000 - 114000
-writing keystores for host lighthouse-geth-58: 114000 - 116000
-writing keystores for host lighthouse-geth-59: 116000 - 118000
-writing keystores for host lighthouse-geth-60: 118000 - 120000
-writing keystores for host lighthouse-geth-61: 120000 - 122000
-writing keystores for host lighthouse-geth-62: 122000 - 124000
-writing keystores for host lighthouse-geth-63: 124000 - 126000
-writing keystores for host lighthouse-geth-64: 126000 - 128000
-writing keystores for host lighthouse-geth-65: 128000 - 130000
-writing keystores for host lighthouse-geth-66: 130000 - 132000
-writing keystores for host lighthouse-geth-67: 132000 - 134000
-writing keystores for host lighthouse-geth-68: 134000 - 136000
-writing keystores for host lighthouse-geth-69: 136000 - 138000
-writing keystores for host lighthouse-besu-1: 138000 - 140000
-writing keystores for host lighthouse-besu-2: 140000 - 142000
-writing keystores for host lighthouse-besu-3: 142000 - 144000
-writing keystores for host lighthouse-besu-4: 144000 - 146000
-writing keystores for host lighthouse-besu-5: 146000 - 148000
-writing keystores for host lighthouse-besu-6: 148000 - 150000
-writing keystores for host lighthouse-besu-7: 150000 - 152000
-writing keystores for host lighthouse-besu-8: 152000 - 154000
-writing keystores for host lighthouse-besu-9: 154000 - 156000
-writing keystores for host lighthouse-besu-10: 156000 - 158000
-writing keystores for host lighthouse-besu-11: 158000 - 160000
-writing keystores for host lighthouse-besu-12: 160000 - 162000
-writing keystores for host lighthouse-nethermind-1: 162000 - 164000
-writing keystores for host lighthouse-nethermind-2: 164000 - 166000
-writing keystores for host lighthouse-nethermind-3: 166000 - 168000
-writing keystores for host lighthouse-nethermind-4: 168000 - 170000
-writing keystores for host lighthouse-nethermind-5: 170000 - 172000
-writing keystores for host lighthouse-nethermind-6: 172000 - 174000
-writing keystores for host lighthouse-nethermind-7: 174000 - 176000
-writing keystores for host lighthouse-nethermind-8: 176000 - 178000
-writing keystores for host lighthouse-nethermind-9: 178000 - 180000
-writing keystores for host lighthouse-nethermind-10: 180000 - 182000
-writing keystores for host lighthouse-nethermind-11: 182000 - 184000
-writing keystores for host lighthouse-nethermind-12: 184000 - 186000
-writing keystores for host lighthouse-nethermind-13: 186000 - 188000
-writing keystores for host lighthouse-nethermind-14: 188000 - 190000
-writing keystores for host lighthouse-nethermind-15: 190000 - 192000
-writing keystores for host lighthouse-nethermind-16: 192000 - 194000
-writing keystores for host lighthouse-nethermind-17: 194000 - 196000
-writing keystores for host lighthouse-nethermind-18: 196000 - 198000
-writing keystores for host lighthouse-nethermind-19: 198000 - 200000
-writing keystores for host lighthouse-nethermind-20: 200000 - 202000
-writing keystores for host lighthouse-nethermind-21: 202000 - 204000
-writing keystores for host lighthouse-erigon-1: 204000 - 206000
-writing keystores for host lighthouse-erigon-2: 206000 - 208000
-writing keystores for host lighthouse-erigon-3: 208000 - 210000
-writing keystores for host lighthouse-erigon-4: 210000 - 212000
-writing keystores for host lighthouse-erigon-5: 212000 - 214000
-writing keystores for host lighthouse-erigon-6: 214000 - 216000
-writing keystores for host lighthouse-erigon-7: 216000 - 218000
-writing keystores for host lighthouse-erigon-8: 218000 - 220000
-writing keystores for host lighthouse-erigon-9: 220000 - 222000
-writing keystores for host lighthouse-erigon-10: 222000 - 224000
-writing keystores for host lighthouse-erigon-11: 224000 - 226000
-writing keystores for host lighthouse-erigon-12: 226000 - 228000
-writing keystores for host prysm-geth-1: 228000 - 230000
-writing keystores for host prysm-geth-2: 230000 - 232000
-writing keystores for host prysm-geth-3: 232000 - 234000
-writing keystores for host prysm-geth-4: 234000 - 236000
-writing keystores for host prysm-geth-5: 236000 - 238000
-writing keystores for host prysm-geth-6: 238000 - 240000
-writing keystores for host prysm-geth-7: 240000 - 242000
-writing keystores for host prysm-geth-8: 242000 - 244000
-writing keystores for host prysm-geth-9: 244000 - 246000
-writing keystores for host prysm-geth-10: 246000 - 248000
-writing keystores for host prysm-geth-11: 248000 - 250000
-writing keystores for host prysm-geth-12: 250000 - 252000
-writing keystores for host prysm-geth-13: 252000 - 254000
-writing keystores for host prysm-geth-14: 254000 - 256000
-writing keystores for host prysm-geth-15: 256000 - 258000
-writing keystores for host prysm-geth-16: 258000 - 260000
-writing keystores for host prysm-geth-17: 260000 - 262000
-writing keystores for host prysm-geth-18: 262000 - 264000
-writing keystores for host prysm-geth-19: 264000 - 266000
-writing keystores for host prysm-geth-20: 266000 - 268000
-writing keystores for host prysm-geth-21: 268000 - 270000
-writing keystores for host prysm-geth-22: 270000 - 272000
-writing keystores for host prysm-geth-23: 272000 - 274000
-writing keystores for host prysm-geth-24: 274000 - 276000
-writing keystores for host prysm-geth-25: 276000 - 278000
-writing keystores for host prysm-geth-26: 278000 - 280000
-writing keystores for host prysm-geth-27: 280000 - 282000
-writing keystores for host prysm-geth-28: 282000 - 284000
-writing keystores for host prysm-geth-29: 284000 - 286000
-writing keystores for host prysm-geth-30: 286000 - 288000
-writing keystores for host prysm-geth-31: 288000 - 290000
-writing keystores for host prysm-geth-32: 290000 - 292000
-writing keystores for host prysm-geth-33: 292000 - 294000
-writing keystores for host prysm-geth-34: 294000 - 296000
-writing keystores for host prysm-geth-35: 296000 - 298000
-writing keystores for host prysm-geth-36: 298000 - 300000
-writing keystores for host prysm-geth-37: 300000 - 302000
-writing keystores for host prysm-geth-38: 302000 - 304000
-writing keystores for host prysm-geth-39: 304000 - 306000
-writing keystores for host prysm-geth-40: 306000 - 308000
-writing keystores for host prysm-geth-41: 308000 - 310000
-writing keystores for host prysm-geth-42: 310000 - 312000
-writing keystores for host prysm-geth-43: 312000 - 314000
-writing keystores for host prysm-geth-44: 314000 - 316000
-writing keystores for host prysm-geth-45: 316000 - 318000
-writing keystores for host prysm-geth-46: 318000 - 320000
-writing keystores for host prysm-geth-47: 320000 - 322000
-writing keystores for host prysm-geth-48: 322000 - 324000
-writing keystores for host prysm-geth-49: 324000 - 326000
-writing keystores for host prysm-geth-50: 326000 - 328000
-writing keystores for host prysm-geth-51: 328000 - 330000
-writing keystores for host prysm-geth-52: 330000 - 332000
-writing keystores for host prysm-geth-53: 332000 - 334000
-writing keystores for host prysm-geth-54: 334000 - 336000
-writing keystores for host prysm-geth-55: 336000 - 338000
-writing keystores for host prysm-geth-56: 338000 - 340000
-writing keystores for host prysm-geth-57: 340000 - 342000
-writing keystores for host prysm-geth-58: 342000 - 344000
-writing keystores for host prysm-geth-59: 344000 - 346000
-writing keystores for host prysm-geth-60: 346000 - 348000
-writing keystores for host prysm-geth-61: 348000 - 350000
-writing keystores for host prysm-geth-62: 350000 - 352000
-writing keystores for host prysm-geth-63: 352000 - 354000
-writing keystores for host prysm-geth-64: 354000 - 356000
-writing keystores for host prysm-geth-65: 356000 - 358000
-writing keystores for host prysm-geth-66: 358000 - 360000
-writing keystores for host prysm-geth-67: 360000 - 362000
-writing keystores for host prysm-geth-68: 362000 - 364000
-writing keystores for host prysm-geth-69: 364000 - 366000
-writing keystores for host prysm-besu-1: 366000 - 368000
-writing keystores for host prysm-besu-2: 368000 - 370000
-writing keystores for host prysm-besu-3: 370000 - 372000
-writing keystores for host prysm-besu-4: 372000 - 374000
-writing keystores for host prysm-besu-5: 374000 - 376000
-writing keystores for host prysm-besu-6: 376000 - 378000
-writing keystores for host prysm-besu-7: 378000 - 380000
-writing keystores for host prysm-besu-8: 380000 - 382000
-writing keystores for host prysm-besu-9: 382000 - 384000
-writing keystores for host prysm-besu-10: 384000 - 386000
-writing keystores for host prysm-besu-11: 386000 - 388000
-writing keystores for host prysm-besu-12: 388000 - 390000
-writing keystores for host prysm-nethermind-1: 390000 - 392000
-writing keystores for host prysm-nethermind-2: 392000 - 394000
-writing keystores for host prysm-nethermind-3: 394000 - 396000
-writing keystores for host prysm-nethermind-4: 396000 - 398000
-writing keystores for host prysm-nethermind-5: 398000 - 400000
-writing keystores for host prysm-nethermind-6: 400000 - 402000
-writing keystores for host prysm-nethermind-7: 402000 - 404000
-writing keystores for host prysm-nethermind-8: 404000 - 406000
-writing keystores for host prysm-nethermind-9: 406000 - 408000
-writing keystores for host prysm-nethermind-10: 408000 - 410000
-writing keystores for host prysm-nethermind-11: 410000 - 412000
-writing keystores for host prysm-nethermind-12: 412000 - 414000
-writing keystores for host prysm-nethermind-13: 414000 - 416000
-writing keystores for host prysm-nethermind-14: 416000 - 418000
-writing keystores for host prysm-nethermind-15: 418000 - 420000
-writing keystores for host prysm-nethermind-16: 420000 - 422000
-writing keystores for host prysm-nethermind-17: 422000 - 424000
-writing keystores for host prysm-nethermind-18: 424000 - 426000
-writing keystores for host prysm-nethermind-19: 426000 - 428000
-writing keystores for host prysm-nethermind-20: 428000 - 430000
-writing keystores for host prysm-nethermind-21: 430000 - 432000
-writing keystores for host prysm-erigon-1: 432000 - 434000
-writing keystores for host prysm-erigon-2: 434000 - 436000
-writing keystores for host prysm-erigon-3: 436000 - 438000
-writing keystores for host prysm-erigon-4: 438000 - 440000
-writing keystores for host prysm-erigon-5: 440000 - 442000
-writing keystores for host prysm-erigon-6: 442000 - 444000
-writing keystores for host prysm-erigon-7: 444000 - 446000
-writing keystores for host prysm-erigon-8: 446000 - 448000
-writing keystores for host prysm-erigon-9: 448000 - 450000
-writing keystores for host prysm-erigon-10: 450000 - 452000
-writing keystores for host prysm-erigon-11: 452000 - 454000
-writing keystores for host prysm-erigon-12: 454000 - 456000
-writing keystores for host lodestar-geth-1: 456000 - 458000
-writing keystores for host lodestar-geth-2: 458000 - 460000
-writing keystores for host lodestar-geth-3: 460000 - 462000
-writing keystores for host nimbus-geth-1: 462000 - 464000
-writing keystores for host nimbus-geth-2: 464000 - 466000
-writing keystores for host nimbus-geth-3: 466000 - 468000
-writing keystores for host nimbus-geth-4: 468000 - 470000
-writing keystores for host nimbus-geth-5: 470000 - 472000
-writing keystores for host nimbus-geth-6: 472000 - 474000
-writing keystores for host nimbus-geth-7: 474000 - 476000
-writing keystores for host nimbus-geth-8: 476000 - 478000
-writing keystores for host nimbus-geth-9: 478000 - 480000
-writing keystores for host nimbus-besu-1: 480000 - 482000
-writing keystores for host nimbus-besu-2: 482000 - 484000
-writing keystores for host nimbus-besu-3: 484000 - 486000
-writing keystores for host nimbus-nethermind-1: 486000 - 488000
-writing keystores for host nimbus-nethermind-2: 488000 - 490000
-writing keystores for host nimbus-nethermind-3: 490000 - 492000
-writing keystores for host nimbus-erigon-1: 492000 - 494000
-writing keystores for host nimbus-erigon-2: 494000 - 496000
-writing keystores for host nimbus-erigon-3: 496000 - 498000
-writing keystores for host teku-geth-1: 498000 - 500000
-writing keystores for host teku-geth-2: 500000 - 502000
-writing keystores for host teku-geth-3: 502000 - 504000
-writing keystores for host teku-geth-4: 504000 - 506000
-writing keystores for host teku-geth-5: 506000 - 508000
-writing keystores for host teku-geth-6: 508000 - 510000
-writing keystores for host teku-geth-7: 510000 - 512000
-writing keystores for host teku-geth-8: 512000 - 514000
-writing keystores for host teku-geth-9: 514000 - 516000
-writing keystores for host teku-geth-10: 516000 - 518000
-writing keystores for host teku-geth-11: 518000 - 520000
-writing keystores for host teku-geth-12: 520000 - 522000
-writing keystores for host teku-geth-13: 522000 - 524000
-writing keystores for host teku-geth-14: 524000 - 526000
-writing keystores for host teku-geth-15: 526000 - 528000
-writing keystores for host teku-geth-16: 528000 - 530000
-writing keystores for host teku-geth-17: 530000 - 532000
-writing keystores for host teku-geth-18: 532000 - 534000
-writing keystores for host teku-geth-19: 534000 - 536000
-writing keystores for host teku-geth-20: 536000 - 538000
-writing keystores for host teku-geth-21: 538000 - 540000
-writing keystores for host teku-geth-22: 540000 - 542000
-writing keystores for host teku-geth-23: 542000 - 544000
-writing keystores for host teku-geth-24: 544000 - 546000
-writing keystores for host teku-geth-25: 546000 - 548000
-writing keystores for host teku-geth-26: 548000 - 550000
-writing keystores for host teku-geth-27: 550000 - 552000
-writing keystores for host teku-geth-28: 552000 - 554000
-writing keystores for host teku-geth-29: 554000 - 556000
-writing keystores for host teku-geth-30: 556000 - 558000
-writing keystores for host teku-besu-1: 558000 - 560000
-writing keystores for host teku-besu-2: 560000 - 562000
-writing keystores for host teku-besu-3: 562000 - 564000
-writing keystores for host teku-besu-4: 564000 - 566000
-writing keystores for host teku-besu-5: 566000 - 568000
-writing keystores for host teku-besu-6: 568000 - 570000
-writing keystores for host teku-nethermind-1: 570000 - 572000
-writing keystores for host teku-nethermind-2: 572000 - 574000
-writing keystores for host teku-nethermind-3: 574000 - 576000
-writing keystores for host teku-nethermind-4: 576000 - 578000
-writing keystores for host teku-nethermind-5: 578000 - 580000
-writing keystores for host teku-nethermind-6: 580000 - 582000
-writing keystores for host teku-nethermind-7: 582000 - 584000
-writing keystores for host teku-nethermind-8: 584000 - 586000
-writing keystores for host teku-nethermind-9: 586000 - 588000
-writing keystores for host teku-erigon-1: 588000 - 590000
-writing keystores for host teku-erigon-2: 590000 - 592000
-writing keystores for host teku-erigon-3: 592000 - 594000
-writing keystores for host teku-erigon-4: 594000 - 596000
-writing keystores for host teku-erigon-5: 596000 - 598000
-writing keystores for host teku-erigon-6: 598000 - 600000
+ansible-playbook -i inventories/devnet-2/inventory.ini playbook.yaml
+```
+from the [ansible/](ansible/) directory to deploy the network. This will generate the genesis file, validators and deploy the network according to the configuration parameters specified in the [ansible/inventories/devnet-2/group_vars/all.yaml](ansible/inventories/devnet-2/group_vars/all.yaml) file.  
+
+Don't forget the following gotchas:
+- Change the `ethereum_genesis_chain_id` value in [ansible/inventories/devnet-2/group_vars/all.yaml](ansible/inventories/devnet-2/group_vars/all.yaml) to avoid clashing with an existing network
+- Ensure you have `docker` running on your local machine, this is essential for generating some post-testnet files
+- Make sure you add the github usernames to `bootstrap_default_user_authorized_keys_github_...`, otherwise ansible will fail on the bootstrap step
+## Cleaning up the Network
+1. Run
+```shell
+ansible-playbook -i inventories/devnet-2/inventory.ini cleanup_ethereum.yaml
+```
+from the [ansible/](ansible/) directory to clean up the network. This will delete the genesis file, validators and clean up the network on all the nodes.
+
+2. Run
+```shell
+ansible-playbook -i inventories/devnet-2/inventory.ini ansible-playbook playbook.yaml -t ethereum_genesis -e ethereum_genesis_cleanup=true
+```
+from the [ansible/](ansible/) directory to clean up the network-configs and validators directories on your local machine. This step is required if you would like to reuse the nodes but with a different genesis configuration. (For example, if you would like to change the validator indexes assigned to the nodes, due to a relaunch).
+
+3. Run `terraform destroy` from the [terraform/devnet-2/](terraform/devnet-2/) directory to delete the nodes. This will remove all the virtual machines and the inventory file. Be careful when running this command, as it will delete all the nodes and the inventory file. You will need to run `terraform apply` again to create the nodes and the inventory file.
+
+## Tooling and Infrastructure
+* The tooling for the different test networks is managed by our Kubernetes stack. These tools utilize the [ethereum-helm-charts](https://github.com/ethpandaops/ethereum-helm-charts) repository. The deployment of the tooling is handled by ArgoCD, a continuous delivery and GitOps tool for Kubernetes. (Warning, this will not work, unless ArgoCD is configured to monitor the repository).
+* Place any custom tooling in the [kubernetes/devnet-2](kubernetes/devnet-2) directory. The tooling will be deployed to the Kubernetes cluster by ArgoCD.
+* Keep the format of kubernetes/devnet-name/tool-name/ as this will be used by ArgoCD to deploy the tooling to the Kubernetes cluster.
+* To update a kubernetes helm chart, remove Chart.lock and run `helm dependency update` from the tool directory. This will update the dependencies for the helm chart. Commit the changes to the repository and ArgoCD will automatically deploy the updated tooling to the Kubernetes cluster.
+* To add a new tool, create a new directory in the [kubernetes/devnet-2](kubernetes/devnet-2) directory. The directory name will be used as the tool name. Place the helm chart in the tool directory. Commit the changes to the repository and ArgoCD will automatically deploy the new tooling to the Kubernetes cluster.
+* To modify the configuration of a tool, modify the values.yaml file in the tool directory. Commit the changes to the repository and ArgoCD will automatically deploy the updated tooling to the Kubernetes cluster.
+* To delete a tool, delete the tool directory or move the devnet to kubernetes-archive directory, as this will not be monitored by ArgoCD. Commit the changes to the repository and ArgoCD will automatically delete the tooling from the Kubernetes cluster.
+
+## Additional tips and tricks
+* To get the IP addresses of the nodes, run `terraform output` from the [terraform/devnet-2/](terraform/devnet-2/) directory.
+* To get the validator ranges run
+```shell
+curl -s https://bootnode-1.pectra-devnet-2.ethpandaops.io/meta/api/v1/validator-ranges.json
+```
+* To get which validator proposed a specific block run
+```shell
+ethdo --connection=https://user:password@bn.lighthouse-nethermind-1.pectra-devnet-2.ethpandaops.io block info --blockid 100 --json | jq -r .message.proposer_index | ./whose_validator.zsh
+```
+from the [ansible/](ansible/) directory.
+* Getting execution layer client enodes
+```shell
+curl -s https://config.pectra-devnet-2.ethpandaops.io/api/v1/nodes/inventory | jq -r '.ethereum_pairs[] | .execution.enode'
+```
+* Getting conseus layer client ENRs
+```shell
+curl -s https://config.pectra-devnet-2.ethpandaops.io/api/v1/nodes/inventory | jq -r '.ethereum_pairs[] | .consensus.enr'
+```
+* Update all sops files
+```shell
+# Find all .sops.* and *.enc.* files and update their keys
+find . -type d -name "vendor" -prune -o \( -type f \( -name "*.sops.*" -o -name "*.enc.*" \) \) -exec sops updatekeys {} -y \;
 ```

@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: all, !localhost
   serial: "{{ batch_count | default('100%') }}"
   become: true
   tasks:
@@ -32,6 +32,9 @@
             - "geth-init"
             - "geth"
             - "nethermind"
+            - "execution"
+            - "execution-init"
+            - "reth"
             # Consensus layer clients
             - "lighthouse-validator"
             - "lighthouse"
@@ -42,9 +45,14 @@
             - "prysm"
             - "teku-validator"
             - "teku"
+            - "grandine"
+            - "beacon"
+            - "validator"
             # Others
             - "ethereum-metrics-exporter"
-            #- "cl-bootnode"
+            - "snooper-engine"
+            - "snooper-rpc"
+            - "cl-bootnode"
         - name: Remove data dirs
           file:
             state: absent
@@ -56,16 +64,21 @@
             - /data/ethereumjs
             - /data/geth
             - /data/nethermind
+            - /data/reth
             # Consensus layer data
             - /data/lighthouse
             - /data/lighthouse-validator
             - /data/lodestar
             - /data/lodestar-validator
             - /data/nimbus
+            - /data/nimbus-validator
             - /data/prysm
             - /data/prysm-validator
             - /data/teku
             - /data/teku-validator
+            - /data/grandine
+            - /data/grandine-validator
             # Config files
             - /data/ethereum-network-config
             - /data/execution-auth.secret
+            - /data/cl-bootnode

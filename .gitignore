@@ -22,6 +22,8 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+.terraform
+.terraform.lock.hcl
 
 # Sops
 **/.decrypted*
@@ -30,5 +32,5 @@ terraform.rc
 **/files/validator_keys/*
 network-configs/**/mnemonics.yaml
 
-# github large files
-network-configs/*/tranches
+# Ignore blobscan for now
+kubernetes/*/blobscan
